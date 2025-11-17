@@ -7,7 +7,7 @@ const router = Router();
 
 // Get signed URL for uploading assets (admin only - add auth middleware in production)
 router.post(
-  '/upload-url',
+  '/upload',
   asyncHandler(async (req: Request, res: Response) => {
     const { filename, contentType } = req.body;
 
@@ -20,7 +20,7 @@ router.post(
 
     const signedUrl = await storageService.generateSignedUploadUrl(filename, contentType);
 
-    res.json({
+    return res.json({
       success: true,
       signedUrl,
       expiresIn: 3600,
@@ -38,7 +38,7 @@ router.get(
 
     res.setHeader('Cache-Control', `public, max-age=${config.cache.cdnMaxAge}`);
 
-    res.json({
+    return res.json({
       success: true,
       url: publicUrl,
     });
@@ -52,7 +52,7 @@ router.get(
     const prefix = (req.query.prefix as string) || '';
     const files = await storageService.listFiles(prefix);
 
-    res.json({
+    return res.json({
       success: true,
       files,
       count: files.length,

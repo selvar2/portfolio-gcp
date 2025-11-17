@@ -31,7 +31,7 @@ export const httpLogger = pinoHttp({
   autoLogging: {
     ignore: (req) => req.url === '/health' || req.url === '/health/liveness',
   },
-  customLogLevel: (req, res, err) => {
+  customLogLevel: (_req, res, err) => {
     if (res.statusCode >= 400 && res.statusCode < 500) {
       return 'warn';
     } else if (res.statusCode >= 500 || err) {

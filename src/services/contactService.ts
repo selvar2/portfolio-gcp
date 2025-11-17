@@ -66,24 +66,24 @@ class ContactService {
     }
   }
 
-  private async sendEmailNotification(formData: ContactFormData): Promise<void> {
-    // In production, integrate with email service
-    // Example using SendGrid:
-    // const msg = {
-    //   to: process.env.CONTACT_EMAIL,
-    //   from: 'noreply@yourdomain.com',
-    //   subject: `Contact Form: ${formData.subject}`,
-    //   text: `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`,
-    //   html: `<strong>Name:</strong> ${formData.name}<br>
-    //          <strong>Email:</strong> ${formData.email}<br><br>
-    //          <p>${formData.message}</p>`,
-    // };
-    // await sgMail.send(msg);
-
-    logger.info('Email notification sent (demo mode)', {
-      to: formData.email,
-    });
-  }
+  // Email notification method (implement in production)
+  // private async _sendEmailNotification(formData: ContactFormData): Promise<void> {
+  //   // In production, integrate with email service
+  //   // Example using SendGrid:
+  //   // const msg = {
+  //   //   to: process.env.CONTACT_EMAIL,
+  //   //   from: 'noreply@yourdomain.com',
+  //   //   subject: `Contact Form: ${formData.subject}`,
+  //   //   text: `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`,
+  //   //   html: `<strong>Name:</strong> ${formData.name}<br>
+  //   //          <strong>Email:</strong> ${formData.email}<br><br>
+  //   //          <p>${formData.message}</p>`,
+  //   // };
+  //   // await sgMail.send(msg);
+  //   // logger.info('Email notification sent (demo mode)', {
+  //   //   to: formData.email,
+  //   // });
+  // }
 }
 
 export const contactService = new ContactService();

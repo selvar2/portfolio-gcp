@@ -19,7 +19,7 @@ describe('Contact Form Endpoint', () => {
     });
 
     it('should reject submission without name', async () => {
-      const invalidData = { ...validContactData };
+      const invalidData: Partial<typeof validContactData> = { ...validContactData };
       delete invalidData.name;
 
       const response = await request(app).post('/api/contact').send(invalidData);

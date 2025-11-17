@@ -1,9 +1,9 @@
-import express, { Application, Request, Response, NextFunction } from 'express';
+import express, { Application, Request, Response } from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 import compression from 'compression';
 import { config } from './config';
-import { logger, httpLogger } from './utils/logger';
+import { httpLogger } from './utils/logger';
 import { errorHandler } from './middleware/errorHandler';
 import { securityHeaders } from './middleware/securityHeaders';
 import { rateLimiter } from './middleware/rateLimiter';
@@ -73,7 +73,7 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/assets', assetsRoutes);
 
 // Root endpoint
-app.get('/', (req: Request, res: Response) => {
+app.get('/', (_req: Request, res: Response) => {
   res.json({
     name: 'Portfolio Backend API',
     version: '1.0.0',

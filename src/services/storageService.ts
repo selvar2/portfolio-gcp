@@ -4,7 +4,7 @@ import { logger } from '../utils/logger';
 
 class StorageService {
   private storage: Storage;
-  private bucket: Bucket;
+  private bucket!: Bucket;
 
   constructor() {
     this.storage = new Storage({
@@ -117,8 +117,8 @@ class StorageService {
 
       const fileList = files.map((file) => ({
         name: file.name,
-        size: parseInt(file.metadata.size || '0'),
-        updated: file.metadata.updated || new Date().toISOString(),
+        size: parseInt(String(file.metadata.size || '0')),
+        updated: file.metadata.updated ? new Date(file.metadata.updated) : new Date(),
       }));
 
       logger.info('Listed files', { count: fileList.length, prefix });

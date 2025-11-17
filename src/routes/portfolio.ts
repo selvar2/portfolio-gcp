@@ -8,14 +8,14 @@ const router = Router();
 // Get portfolio data
 router.get(
   '/',
-  asyncHandler(async (req: Request, res: Response) => {
+  asyncHandler(async (_req: Request, res: Response) => {
     const portfolioData = await portfolioService.getPortfolioData();
 
     // Set cache headers
     res.setHeader('Cache-Control', `public, max-age=${config.cache.maxAge}`);
     res.setHeader('CDN-Cache-Control', `public, max-age=${config.cache.cdnMaxAge}`);
 
-    res.json({
+    return res.json({
       success: true,
       data: portfolioData,
       timestamp: new Date().toISOString(),
@@ -50,7 +50,7 @@ router.get(
     res.setHeader('Cache-Control', `public, max-age=${config.cache.maxAge}`);
     res.setHeader('CDN-Cache-Control', `public, max-age=${config.cache.cdnMaxAge}`);
 
-    res.json({
+    return res.json({
       success: true,
       section,
       data: sectionData,

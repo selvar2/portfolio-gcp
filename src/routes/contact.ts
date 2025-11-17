@@ -58,7 +58,7 @@ router.post(
       userAgent: req.get('user-agent'),
     });
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: 'Your message has been sent successfully. We will get back to you soon.',
       timestamp: new Date().toISOString(),
