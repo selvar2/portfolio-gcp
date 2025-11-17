@@ -47,10 +47,7 @@ class StorageService {
   /**
    * Generate a signed URL for downloading files
    */
-  async generateSignedDownloadUrl(
-    filename: string,
-    expiresIn: number = 3600
-  ): Promise<string> {
+  async getSignedUrl(filename: string, expiresIn: number = 3600): Promise<string> {
     try {
       const file = this.bucket.file(filename);
 
@@ -112,7 +109,9 @@ class StorageService {
   /**
    * List files in bucket
    */
-  async listFiles(prefix: string = ''): Promise<Array<{ name: string; size: number; updated: string }>> {
+  async listFiles(
+    prefix: string = ''
+  ): Promise<Array<{ name: string; size: number; updated: Date }>> {
     try {
       const [files] = await this.bucket.getFiles({ prefix });
 

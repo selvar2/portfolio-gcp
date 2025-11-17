@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { body, validationResult } from 'express-validator';
-import { asyncHandler, AppError } from '../middleware/errorHandler';
+import { asyncHandler } from '../middleware/errorHandler';
 import { contactRateLimiter } from '../middleware/rateLimiter';
 import { contactService } from '../services/contactService';
 
@@ -36,18 +36,14 @@ router.post(
       .withMessage('Message is required')
       .isLength({ min: 10, max: 5000 })
       .withMessage('Message must be between 10 and 5000 characters'),
-    body('recaptchaToken')
-      .optional()
-      .isString()
-      .withMessage('Invalid reCAPTCHA token'),
+    body('phone').optional().isString().trim(),
   ],
   asyncHandler(async (req: Request, res: Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      throw new AppError(
-        `Validation failed: ${errors.array().map((e) => e.msg).join(', ')}`,
-        400
-      );
+      return res.status(400).json({
+        errors: errors.array().map((e) => e.msg),
+      });
     }
 
     const { name, email, subject, message, recaptchaToken } = req.body;

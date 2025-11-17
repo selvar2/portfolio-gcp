@@ -11,7 +11,7 @@ interface ContactFormData {
 }
 
 class ContactService {
-  async verifyRecaptcha(token: string): Promise<boolean> {
+  async verifyRecaptcha(_token: string): Promise<boolean> {
     // In production, verify reCAPTCHA token
     // const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
     //   method: 'POST',
@@ -46,7 +46,7 @@ class ContactService {
       // 1. Store submission in Firestore or Cloud SQL
       // 2. Send email notification using SendGrid, Mailgun, or Cloud Functions
       // 3. Optionally send to Slack/Discord webhook
-      
+
       // Example: Store in Firestore
       // await firestore.collection('contact-submissions').add({
       //   ...formData,

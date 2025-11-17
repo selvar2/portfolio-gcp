@@ -11,9 +11,7 @@ describe('Contact Form Endpoint', () => {
     };
 
     it('should accept valid contact form submission', async () => {
-      const response = await request(app)
-        .post('/api/contact')
-        .send(validContactData);
+      const response = await request(app).post('/api/contact').send(validContactData);
 
       expect(response.status).toBe(200);
       expect(response.body).toHaveProperty('success', true);
@@ -24,9 +22,7 @@ describe('Contact Form Endpoint', () => {
       const invalidData = { ...validContactData };
       delete invalidData.name;
 
-      const response = await request(app)
-        .post('/api/contact')
-        .send(invalidData);
+      const response = await request(app).post('/api/contact').send(invalidData);
 
       expect(response.status).toBe(400);
       expect(response.body).toHaveProperty('error');
@@ -38,9 +34,7 @@ describe('Contact Form Endpoint', () => {
         email: 'invalid-email',
       };
 
-      const response = await request(app)
-        .post('/api/contact')
-        .send(invalidData);
+      const response = await request(app).post('/api/contact').send(invalidData);
 
       expect(response.status).toBe(400);
       expect(response.body).toHaveProperty('error');
@@ -52,9 +46,7 @@ describe('Contact Form Endpoint', () => {
         subject: 'Hi',
       };
 
-      const response = await request(app)
-        .post('/api/contact')
-        .send(invalidData);
+      const response = await request(app).post('/api/contact').send(invalidData);
 
       expect(response.status).toBe(400);
       expect(response.body).toHaveProperty('error');
@@ -66,9 +58,7 @@ describe('Contact Form Endpoint', () => {
         message: 'Short',
       };
 
-      const response = await request(app)
-        .post('/api/contact')
-        .send(invalidData);
+      const response = await request(app).post('/api/contact').send(invalidData);
 
       expect(response.status).toBe(400);
       expect(response.body).toHaveProperty('error');
@@ -80,9 +70,7 @@ describe('Contact Form Endpoint', () => {
         email: '  john@example.com  ',
       };
 
-      const response = await request(app)
-        .post('/api/contact')
-        .send(dataWithWhitespace);
+      const response = await request(app).post('/api/contact').send(dataWithWhitespace);
 
       expect(response.status).toBe(200);
     });
@@ -93,9 +81,7 @@ describe('Contact Form Endpoint', () => {
         recaptchaToken: 'test-token',
       };
 
-      const response = await request(app)
-        .post('/api/contact')
-        .send(dataWithRecaptcha);
+      const response = await request(app).post('/api/contact').send(dataWithRecaptcha);
 
       expect(response.status).toBe(200);
     });
@@ -111,14 +97,14 @@ describe('Contact Form Endpoint', () => {
       };
 
       // Make multiple requests (rate limit is 5 per 15 minutes)
-      const requests = Array(6).fill(null).map(() =>
-        request(app).post('/api/contact').send(validContactData)
-      );
+      const requests = Array(6)
+        .fill(null)
+        .map(() => request(app).post('/api/contact').send(validContactData));
 
       const responses = await Promise.all(requests);
-      
+
       // At least one should be rate limited
-      const rateLimited = responses.some(r => r.status === 429);
+      const rateLimited = responses.some((r) => r.status === 429);
       expect(rateLimited).toBe(true);
     }, 10000); // Increase timeout for this test
   });

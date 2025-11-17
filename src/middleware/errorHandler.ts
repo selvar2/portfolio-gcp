@@ -15,11 +15,11 @@ export class AppError extends Error {
 }
 
 export const errorHandler = (
-  err: Error | AppError,
+  err: Error,
   req: Request,
   res: Response,
-  next: NextFunction
-) => {
+  _next: NextFunction
+): void => {
   let statusCode = 500;
   let message = 'Internal Server Error';
   let isOperational = false;

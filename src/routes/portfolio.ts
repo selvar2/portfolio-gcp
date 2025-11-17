@@ -28,7 +28,14 @@ router.get(
   '/:section',
   asyncHandler(async (req: Request, res: Response) => {
     const { section } = req.params;
-    const validSections = ['about', 'experience', 'education', 'skills', 'projects', 'certifications'];
+    const validSections = [
+      'about',
+      'experience',
+      'education',
+      'skills',
+      'projects',
+      'certifications',
+    ];
 
     if (!validSections.includes(section)) {
       return res.status(400).json({

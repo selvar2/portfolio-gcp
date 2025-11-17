@@ -26,7 +26,14 @@ describe('Portfolio Endpoints', () => {
   });
 
   describe('GET /api/portfolio/:section', () => {
-    const validSections = ['about', 'experience', 'education', 'skills', 'projects', 'certifications'];
+    const validSections = [
+      'about',
+      'experience',
+      'education',
+      'skills',
+      'projects',
+      'certifications',
+    ];
 
     validSections.forEach((section) => {
       it(`should return ${section} section`, async () => {
@@ -66,7 +73,7 @@ describe('Portfolio Endpoints', () => {
 
       expect(Array.isArray(experience)).toBe(true);
       expect(experience.length).toBeGreaterThan(0);
-      
+
       const firstExp = experience[0];
       expect(firstExp).toHaveProperty('company');
       expect(firstExp).toHaveProperty('position');

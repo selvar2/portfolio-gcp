@@ -37,7 +37,7 @@ router.get(
     const publicUrl = storageService.getPublicUrl(filename);
 
     res.setHeader('Cache-Control', `public, max-age=${config.cache.cdnMaxAge}`);
-    
+
     res.json({
       success: true,
       url: publicUrl,

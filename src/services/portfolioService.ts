@@ -128,7 +128,7 @@ class PortfolioService {
         endDate: '2018-05',
         gpa: '3.8/4.0',
         achievements: [
-          'Dean\'s List all semesters',
+          "Dean's List all semesters",
           'President of Computer Science Club',
           'Published research on distributed systems',
         ],
