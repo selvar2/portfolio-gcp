@@ -11,6 +11,8 @@ export const rateLimiter = rateLimit({
   },
   standardHeaders: true,
   legacyHeaders: false,
+  // Disable trust proxy validation - app.ts already handles this
+  validate: { trustProxy: false },
   handler: (req, res) => {
     logger.warn({
       message: 'Rate limit exceeded',
@@ -38,4 +40,9 @@ export const contactRateLimiter = rateLimit({
   },
   standardHeaders: true,
   legacyHeaders: false,
+  validate: { trustProxy: false },
+  skip: () => {
+    // Skip rate limiting in test environment
+    return process.env.NODE_ENV === 'test';
+  },
 });

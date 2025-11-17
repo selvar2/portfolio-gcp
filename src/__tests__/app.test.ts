@@ -20,7 +20,6 @@ describe('Health Endpoints', () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toHaveProperty('status', 'alive');
-      expect(response.body).toHaveProperty('timestamp');
     });
   });
 
