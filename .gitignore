@@ -45,3 +45,7 @@ temp/
 
 # OS
 Thumbs.db
+
+# Claude Code - ignore local config, but keep .mcp.json for team sharing
+.claude.json
+.claude/
